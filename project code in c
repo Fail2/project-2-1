@@ -1,0 +1,249 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+    while(1)
+    {
+        int n;
+        printf("Menu:\n");
+        printf("1.AND Operation\n");
+        printf("2.OR Operation:\n");
+        printf("3.NOT Operation:\n");
+        printf("4.NAND Operation\n");
+        printf("5.NOR Operation\n");
+        printf("6.X-OR Operation\n");
+        printf("7.X-NOR Operation\n");
+        printf("\n\nEnter your expected operation number: ");
+        scanf("%d",&n);
+        if(n>7)
+        {
+            printf("there is no such operator\n");
+            continue;
+        }
+        if(n==0)
+        {
+            break;
+        }
+        int a[64],b[64],number, i, j,number2,cn=0,cn1=0;
+        printf("Enter the first number:");
+        scanf("%d", &number);
+
+        for(i = 0;; i++)                 //for getting binary of numbers
+        {
+            if(number==0)
+                break;
+            a[i] = number % 2;
+            number = number / 2;
+            cn++;
+        }
+        printf("Binary Number of a Given Number =");
+        for(j = i - 1; j >= 0; j--)
+        {
+            printf(" %d ", a[j]);
+        }
+        printf("\n");
+        printf("Enter the second number:");
+        scanf("%d",&number2);
+        for(i = 0;; i++)
+        {
+            if(number2==0)break;
+            b[i] = number2 % 2;
+            number2 = number2 / 2;
+            cn1++;
+        }
+        printf("Binary Number of a Given Number =");
+        for(j = i - 1; j >= 0; j--)
+        {
+            printf(" %d ", b[j]);
+        }
+        printf("\n");
+        //printf("%d %d\n",cn,cn1);
+        int l=0,l1=0;
+        //for and operation
+
+        if(cn>cn1)
+        {
+            l=cn1;
+            l1=cn;
+        }
+        else
+        {
+            l=cn;
+            l1=cn1;
+        }
+
+
+        if(n==1)
+        {
+            printf("       Ans of AND operation:\n");
+            int product;
+
+            for (i = 0; i <l; i++)
+            {
+
+                // using product method
+                product = a[i] * b[i];
+
+                printf("\n %d AND %d = %d",
+                       a[i], b[i], product);
+            }
+            for(int jj=0;jj<l1-l;jj++){
+                   if(cn>cn1) printf("\n %d AND 0 = 0",
+                       a[i]);
+                       else printf("\n 0 AND %d = 0",
+                        b[i]);
+            }
+            printf("\n");
+
+        }
+        else if(n==2)
+        {
+            printf("        Ans of OR operation:\n");
+            int or_ans;
+
+            for (i = 0; i <l; i++)
+            {
+
+                // using the + operator
+                if (a[i] + b[i] > 0)
+                    or_ans = 1;
+                else
+                    or_ans = 0;
+
+                printf("\n %d OR %d = %d",
+                       a[i], b[i], or_ans);
+            }
+               for(int jj=0;jj<l1-l;jj++){
+                   if(cn>cn1) printf("\n %d OR 0 = %d",
+                       a[i],a[i]);
+                       else printf("\n 0 OR %d = %d",
+                        b[i],b[i]);
+            }
+            printf("\n");
+        }
+        else if(n==3)
+        {
+            printf("       Ans of NOT operation:\n");
+            int ans_not;
+            printf("1st number Not operation");
+            for (i = 0; i <cn; i++)
+            {
+                if (a[i] == 0)
+                    ans_not = 1;
+                else
+                    ans_not = 0;
+                printf("\n  NOT %d = %d", a[i], ans_not);
+            }
+            printf("\n");
+            printf("2nd number Not operation");
+            for (i = 0; i <cn1; i++)
+            {
+                if (b[i] == 0)
+                    ans_not = 1;
+                else
+                    ans_not = 0;
+                printf("\n  NOT %d = %d", b[i], ans_not);
+            }
+            printf("\n");
+        }
+        else if(n==4)
+        {
+            printf("        Ans of NAND operation:\n");
+            int ans_nand;
+
+            for (i = 0; i <l; i++)
+            {
+                if (a[i] == 1 && b[i] == 1)
+                    ans_nand = 0;
+                else
+                    ans_nand = 1;
+                printf("\n %d NAND %d = %d",
+                       a[i], b[i], ans_nand);
+            }
+               for(int jj=0;jj<l1-l;jj++){
+                   if(cn>cn1) printf("\n %d NAND 0 = 1",
+                       a[i]);
+                       else printf("\n 0 NAND %d = 1",
+                        b[i]);
+            }
+            printf("\n");
+        }
+        else if(n==5)
+        {
+            printf("       Ans of NOR operation:\n");
+            int ans_nor;
+
+            for (i = 0; i <l; i++)
+            {
+                ans_nor = !(a[i] + b[i]);
+                printf("\n %d NOR %d = %d",
+                       a[i], b[i], ans_nor);
+            }
+             for(int jj=0;jj<l1-l;jj++){
+                    int pp;
+             if(cn>cn1)pp=abs(1-a[i]);
+             else pp=abs(1-b[i]);
+                   if(cn>cn1) printf("\n %d NOR 0 = %d",
+                       a[i],pp);
+                       else printf("\n 0 NOR %d = %d",
+                        b[i],pp);
+            }
+            printf("\n");
+        }
+        else if(n==6)
+        {
+            printf("       Ans of X-OR operation:\n");
+            int ans_xor;
+
+            for (i = 0; i <l; i++)
+            {
+                if ((a[i] == 1 && b[i] == 1)||(a[i] == 0 && b[i] == 0))
+                    ans_xor = 0;
+                else
+                    ans_xor= 1;
+                printf("\n %d X-OR %d = %d",
+                       a[i], b[i], ans_xor);
+            }
+               for(int jj=0;jj<l1-l;jj++){
+                    int pp;
+                    if(cn>cn1)
+                     pp=abs(1-a[i]);
+                   else  pp= abs(1-b[i]);
+
+                   if(cn>cn1) printf("\n %d X-OR 0 = %d",
+                       a[i],pp);
+                       else printf("\n 0 X-OR %d = %d",
+                        b[i],pp);
+            }
+            printf("\n");
+        }
+        else if(n==7)
+        {
+            printf("        Ans of X-NOR operation:\n");
+            int ans_xnor;
+
+            for (i = 0; i <l; i++)
+            {
+                if ((a[i] == 1 && b[i] == 1)||(a[i] == 1 && b[i] == 1))
+                    ans_xnor = 1;
+                else
+                    ans_xnor= 0;
+                printf("\n %d X-NOR %d = %d",
+                       a[i], b[i], ans_xnor);
+            }
+               for(int jj=0;jj<l1-l;jj++){
+                    int pp;
+                     if(cn>cn1)
+                     pp=abs(1-a[i]);
+                   else  pp=abs(1-b[i]);
+                  pp=1-pp;
+                   if(cn>cn1) printf("\n %d X-NOR  0 = %d",
+                       a[i],pp);
+                       else printf("\n 0 X-NOR %d = %d",
+                        b[i],pp);
+            }
+            printf("\n");
+        }
+    }
+}
+
